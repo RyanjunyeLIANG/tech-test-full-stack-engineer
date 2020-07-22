@@ -1,0 +1,34 @@
+.outer-warpper {
+  width: 100%;
+  height: 100%;
+}
+
+.panel-warpper {
+  min-width: 100%;
+  min-height: 25%;
+  display: inline-flex;
+  justify-content: center;
+  text-align: center;
+  align-items: center;
+}
+
+.item-container {
+  width: 50%;
+  height: 10vh;
+  display: inline-flex;
+  justify-content: center;
+  text-align: center;
+  align-items: center;
+  border: 1px solid black;
+}
+
+.display-warpper {
+  display: block;
+  width: 100%;
+  height: 75%;
+  border: 1px solid black;
+}
+
+.input-group {
+  display: inline-block;
+}
