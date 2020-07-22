@@ -27,8 +27,13 @@
   width: 100%;
   height: 75%;
   border: 1px solid black;
+  overflow-x: auto;
 }
 
 .input-group {
   display: inline-block;
+}
+
+div .item-container form {
+  width: 100%;
 }
