@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 
 import ResultDisplay from './UI/ResultDisplay';
 import Button from './UI/Button';
@@ -10,12 +10,26 @@ import './Console.css';
 const Console = () => {
   const [result, setResult] = useState('');
   const [text, setText] = useState('');
+  const [isDisabled, setDisable] = useState(true);
 
+  const inputPattern = /[^\W]{1}[A-Za-z0-9-_]+/;
   const url = 'http://localhost:4000';
   const capsulesUrl = url + '/capsules';
   const landpadUrl = url + `/landpads/${text}`;
 
-  const getCapsule = (e) => {
+  useEffect(() => {
+    inputValidator();
+  });
+
+  const inputValidator = () => {
+    if(!text.match(inputPattern) || text === '') {
+      setDisable(true)
+    } else {
+      setDisable(false)
+    }
+  }
+
+  const getCapsules = (e) => {
     e.preventDefault();
     fetch(capsulesUrl)
       .then(
@@ -47,7 +61,7 @@ const Console = () => {
       </div>
       <div className='panel-warpper'>
         <div className='item-container' style={{width: '30%'}}>
-          <Button onClick={getCapsule}>Capsules</Button>
+          <Button onClick={getCapsules}>Capsules</Button>
         </div>
         <div className='item-container' style={{width: '20%'}}>
           <Rocket />
@@ -57,10 +71,10 @@ const Console = () => {
             <InputField
               placeholder="text"
               onChange={(e) => setText(e.target.value)}
-              pattern='[A-Za-z0-9-_]{1,}'
+              pattern={inputPattern}
               required
             />
-            <Button buttonType="submit">Landing Pad</Button>
+            <Button buttonType="submit" disabled={isDisabled}>Landing Pad</Button>
           </form>
         </div>
       </div>
