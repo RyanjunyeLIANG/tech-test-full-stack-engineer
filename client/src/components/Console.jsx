@@ -36,7 +36,10 @@ const Console = () => {
         res => res.json()
       )
       .then(
-        jsondata => setResult(JSON.stringify(jsondata))
+        jsondata => {
+          const sortedData = jsondata.sort((a, b) => b.original_launch - a.original_launch)
+          setResult(JSON.stringify(sortedData))
+        }
       )
       .catch(err => console.log(err));
   }
